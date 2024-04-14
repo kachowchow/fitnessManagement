@@ -75,6 +75,6 @@ end_time
 
 # DDL File
 
-SQL/DDL.sql
+[SQL/DDL.sql](https://github.com/kachowchow/fitnessManagement/blob/23005997e2bed901ff3e18e08e87a83e021eb356/SQL/DDL.sql)
 
 # DML File
