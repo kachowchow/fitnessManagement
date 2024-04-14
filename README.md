@@ -32,46 +32,46 @@ TrainerAvailability:
   start_time  
   end_time  
 
-Rooms:
-  room_id (Primary Key)
-  room_name
-  capacity
+Rooms:  
+  room_id (Primary Key)  
+  room_name  
+  capacity  
 
-Classes:
-  class_id (Primary Key)
-  class_name
-  instructor_id (Foreign Key - references Trainers(trainer_id))
-  class_type
-  class_description
-  class_capacity
-  start_time
-  end_time
-  class_date
+Classes:  
+  class_id (Primary Key)  
+  class_name  
+  instructor_id (Foreign Key - references Trainers(trainer_id))  
+  class_type  
+  class_description  
+  class_capacity  
+  start_time  
+  end_time  
+  class_date  
 
-Billing:
-  bill_id (Primary Key)
-  member_id (Foreign Key - references Members(member_id))
-  amount
-  bill_date
-  payment_status
+Billing:  
+  bill_id (Primary Key)  
+  member_id (Foreign Key - references Members(member_id))  
+  amount  
+  bill_date  
+  payment_status  
 
-Equipment:
-  equipment_id (Primary Key)
-  equipment_name
-  status
+Equipment:  
+  equipment_id (Primary Key)  
+  equipment_name  
+  status  
 
-EquipmentMaintenance:
-  maintenance_id (Primary Key)
-  equipment_id (Foreign Key - references Equipment(equipment_id))
-  maintenance_date
-  description
+EquipmentMaintenance:  
+  maintenance_id (Primary Key)  
+  equipment_id (Foreign Key - references Equipment(equipment_id))  
+  maintenance_date  
+  description  
 
-RoomBookings:
-  booking_id (Primary Key)
-  room_id (Foreign Key - references Rooms(room_id))
-  activity
-  start_time
-  end_time
+RoomBookings:  
+  booking_id (Primary Key)  
+  room_id (Foreign Key - references Rooms(room_id))  
+  activity  
+  start_time  
+  end_time  
 
 # DDL File
 
