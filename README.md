@@ -78,3 +78,5 @@ end_time
 [SQL/DDL.sql](https://github.com/kachowchow/fitnessManagement/blob/23005997e2bed901ff3e18e08e87a83e021eb356/SQL/DDL.sql)
 
 # DML File
+
+https://github.com/kachowchow/fitnessManagement/blob/c25b321495ab871c6f14cfdaa813cad7701fab41/SQL/DML.sql
