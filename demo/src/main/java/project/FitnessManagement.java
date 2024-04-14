@@ -30,28 +30,6 @@ public class FitnessManagement {
         if (conn != null) conn.close();
     }
 
-
-    public void bookRoom(int roomID, String activity, String startTime, String endTime) throws SQLException {
-        //check if roomID is in database
-        String query = "SELECT room_id FROM ROOMS WHERE room_id = ?";
-        preparedStatement = conn.prepareStatement(query);
-        preparedStatement.setInt(1, roomID);
-        resultSet = preparedStatement.executeQuery();
-
-        if (resultSet.next()){
-            query = "INSERT INTO RoomBookings (room_id, activity, start_time, end_time) VALUES (?, ?, ?, ?)";
-            preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setInt(1, roomID);
-            preparedStatement.setString(2, activity);
-            preparedStatement.setString(3, startTime);
-            preparedStatement.setString(4, endTime);
-            preparedStatement.executeUpdate();
-            System.out.println("Room booked");
-        } else {
-            System.out.println("RoomID doesn't exist");
-        }
-    }
-
     //TODO: DISPLAY FUNCTIONS
     public void viewMember(String name) throws SQLException {
         String query = "SELECT * FROM Members WHERE name LIKE ?";
@@ -260,6 +238,31 @@ public class FitnessManagement {
         System.out.println("Class added");
     }
 
+    public void bookRoom(int roomID, String activity, String startTime, String endTime) throws SQLException {
+        //check if roomID is in database
+        String query = "SELECT room_id FROM ROOMS WHERE room_id = ?";
+        preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setInt(1, roomID);
+        resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()){
+            query = "INSERT INTO RoomBookings (room_id, activity, start_time, end_time) VALUES (?, ?, ?, ?)";
+
+            java.sql.Time sqlStartTime = java.sql.Time.valueOf(startTime);
+            java.sql.Time sqlEndTime = java.sql.Time.valueOf(endTime);
+
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, roomID);
+            preparedStatement.setString(2, activity);
+            preparedStatement.setTime(3, sqlStartTime);
+            preparedStatement.setTime(4, sqlEndTime);
+            preparedStatement.executeUpdate();
+            System.out.println("Room booked");
+        } else {
+            System.out.println("RoomID doesn't exist");
+        }
+    }
+
     //TODO: UPDATE/SET/DELETE FUNCTIONS
     public void updateMember(int memberID, String email, String address) throws SQLException{
         String query = "UPDATE Members SET email = ?, address = ? WHERE member_id = ?";
@@ -368,67 +371,67 @@ public class FitnessManagement {
         try {
             FitnessManagement.conn = Connect();
             
-            FitnessManagement.registerMember(1, "john_doe", "password123", "john@example.com", "John Doe", "123 Main St", "1990-01-01", "Lose weight", 180.0, 75.0);
-            FitnessManagement.registerMember(2, "jane_smith", "password456", "jane@example.com", "Jane Smith", "456 Elm St", "1992-05-15", "Build muscle", 170.0, 65.0);
-            FitnessManagement.registerMember(3, "mike_jackson", "password789", "mike@example.com", "Mike Jackson", "789 Oak St", "1985-09-22", "Improve endurance", 175.0, 80.0);
-            FitnessManagement.registerMember(4, "emily_wilson", "password123", "emily@example.com", "Emily Wilson", "101 Maple St", "1988-03-10", "Increase flexibility", 160.0, 60.0);
-            FitnessManagement.registerMember(5, "chris_adams", "password456", "chris@example.com", "Chris Adams", "202 Pine St", "1995-11-28", "Maintain weight", 185.0, 70.0); 
+            // FitnessManagement.registerMember(1, "john_doe", "password123", "john@example.com", "John Doe", "123 Main St", "1990-01-01", "Lose weight", 180.0, 75.0);
+            // FitnessManagement.registerMember(2, "jane_smith", "password456", "jane@example.com", "Jane Smith", "456 Elm St", "1992-05-15", "Build muscle", 170.0, 65.0);
+            // FitnessManagement.registerMember(3, "mike_jackson", "password789", "mike@example.com", "Mike Jackson", "789 Oak St", "1985-09-22", "Improve endurance", 175.0, 80.0);
+            // FitnessManagement.registerMember(4, "emily_wilson", "password123", "emily@example.com", "Emily Wilson", "101 Maple St", "1988-03-10", "Increase flexibility", 160.0, 60.0);
+            // FitnessManagement.registerMember(5, "chris_adams", "password456", "chris@example.com", "Chris Adams", "202 Pine St", "1995-11-28", "Maintain weight", 185.0, 70.0); 
 
-            FitnessManagement.updateMember(1, "john.doe@example.com", "456 Elm St");
+            // FitnessManagement.updateMember(1, "john.doe@example.com", "456 Elm St");
 
-            FitnessManagement.setFitnessGoal(1, "Gain muscle mass");
+            // FitnessManagement.setFitnessGoal(1, "Gain muscle mass");
 
-            FitnessManagement.setHealthMetrics(1, 182.0, 80.0);
+            // FitnessManagement.setHealthMetrics(1, 182.0, 80.0);
 
-            FitnessManagement.addTrainer(1, "John Trainer", "john_trainer@example.com", "1234567890", "Weightlifting");
-            FitnessManagement.addTrainer(2, "Jane Trainer", "jane_trainer@example.com", "9876543210", "Yoga");
-            FitnessManagement.addTrainer(3, "Mike Trainer", "mike_trainer@example.com", "4561237890", "Cardio");
-            FitnessManagement.addTrainer(4, "Emily Trainer", "emily_trainer@example.com", "7894561230", "Pilates");
-            FitnessManagement.addTrainer(5, "Chris Trainer", "chris_trainer@example.com", "3216549870", "CrossFit");
+            // FitnessManagement.addTrainer(1, "John Trainer", "john_trainer@example.com", "1234567890", "Weightlifting");
+            // FitnessManagement.addTrainer(2, "Jane Trainer", "jane_trainer@example.com", "9876543210", "Yoga");
+            // FitnessManagement.addTrainer(3, "Mike Trainer", "mike_trainer@example.com", "4561237890", "Cardio");
+            // FitnessManagement.addTrainer(4, "Emily Trainer", "emily_trainer@example.com", "7894561230", "Pilates");
+            // FitnessManagement.addTrainer(5, "Chris Trainer", "chris_trainer@example.com", "3216549870", "CrossFit");
 
-            FitnessManagement.addRoom(1, "Yoga Room", 50);
-            FitnessManagement.addRoom(2, "Weight Room", 100);
-            FitnessManagement.addRoom(3, "Cardio Room", 25);
-            FitnessManagement.addRoom(4, "Pilates Room", 25);
-            FitnessManagement.addRoom(5, "CrossFit Room", 25);
+            // FitnessManagement.addRoom(1, "Yoga Room", 50);
+            // FitnessManagement.addRoom(2, "Weight Room", 100);
+            // FitnessManagement.addRoom(3, "Cardio Room", 25);
+            // FitnessManagement.addRoom(4, "Pilates Room", 25);
+            // FitnessManagement.addRoom(5, "CrossFit Room", 25);
 
-            FitnessManagement.addClass("Yoga Class", 1, "Yoga", "Beginner Level", 20, "10:00", "11:00", "2024-04-12");
+            // FitnessManagement.addClass("Yoga Class", 1, "Yoga", "Beginner Level", 20, "10:00", "11:00", "1990-02-02");
 
-            FitnessManagement.addEquipment("Treadmill");
+            // FitnessManagement.addEquipment("Treadmill");
 
-            FitnessManagement.healthStats(1);
+            // FitnessManagement.healthStats(1);
 
-            FitnessManagement.viewMember("John");
-            FitnessManagement.viewMember("Jane");
-            FitnessManagement.viewMember("Mike");
-            FitnessManagement.viewMember("Emily");
-            FitnessManagement.viewMember("Chris");
+            // FitnessManagement.viewMember("John");
+            // FitnessManagement.viewMember("Jane");
+            // FitnessManagement.viewMember("Mike");
+            // FitnessManagement.viewMember("Emily");
+            // FitnessManagement.viewMember("Chris");
 
-            FitnessManagement.viewClass();
+            // FitnessManagement.viewClass();
 
-            FitnessManagement.viewTrainers();
+            // FitnessManagement.viewTrainers();
 
-            FitnessManagement.viewEquipment();
+            // FitnessManagement.viewEquipment();
 
-            FitnessManagement.viewRooms();
+            // FitnessManagement.viewRooms();
 
-            FitnessManagement.bookRoom(1, "Yoga Class", "10:00", "11:00");
+            // FitnessManagement.bookRoom(1, "Yoga Class", "10:00", "11:00");
 
-            FitnessManagement.setEquipmentStatus(1, "In Use");
+            // FitnessManagement.setEquipmentStatus(1, "In Use");
 
-            FitnessManagement.updateClass(1, "Yoga Class Updated", 1, "Yoga", "Intermediate Level", 30, "09:00", "10:00", "2024-04-13");
+            // FitnessManagement.updateClass(1, "Yoga Class Updated", 1, "Yoga", "Intermediate Level", 30, "09:00", "10:00", "2024-04-13");
 
-            FitnessManagement.setAvailability(1, "08:00", "12:00");
+            // FitnessManagement.setAvailability(1, "08:00", "12:00");
 
-            FitnessManagement.generateBill(1, 50.00, "2024-04-12");
+            // FitnessManagement.generateBill(1, 50.00, "2024-04-12");
 
-            FitnessManagement.updatePaymentStatus(1, "Paid");
+            // FitnessManagement.updatePaymentStatus(1, "Paid");
 
-            FitnessManagement.deleteMember(1);
-            FitnessManagement.deleteMember(2);
-            FitnessManagement.deleteMember(3);
-            FitnessManagement.deleteMember(4);
-            FitnessManagement.deleteMember(5);
+            // FitnessManagement.deleteMember(1);
+            // FitnessManagement.deleteMember(2);
+            // FitnessManagement.deleteMember(3);
+            // FitnessManagement.deleteMember(4);
+            // FitnessManagement.deleteMember(5);
         } catch (Exception e){
             System.out.println(e);
         } finally {
