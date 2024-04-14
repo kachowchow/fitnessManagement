@@ -7,30 +7,30 @@ Final Project Report ↓
 ![image](https://github.com/kachowchow/fitnessManagement/assets/112474998/a4e3eece-de41-44e8-9a74-429963d378cf)
 
 # Reduction to Relation Schemas
-Members:
-  member_id (Primary Key)
-  username
-  password
-  email
-  name
-  address
-  date_of_birth
-  fitness_goal
-  height
-  weight
+Members:  
+  member_id (Primary Key)  
+  username  
+  password  
+  email  
+  name  
+  address  
+  date_of_birth  
+  fitness_goal  
+  height  
+  weight  
 
 Trainers:
-  trainer_id (Primary Key)
-  name
-  email
-  phone_number
-  specialization
+  trainer_id (Primary Key)  
+  name  
+  email  
+  phone_number  
+  specialization  
 
-TrainerAvailability:
-  availability_id (Primary Key)
-  trainer_id (Foreign Key - references Trainers(trainer_id))
-  start_time
-  end_time
+TrainerAvailability:  
+  availability_id (Primary Key)  
+  trainer_id (Foreign Key - references Trainers(trainer_id))  
+  start_time  
+  end_time  
 
 Rooms:
   room_id (Primary Key)
