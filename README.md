@@ -75,4 +75,6 @@ end_time
 
 # DDL File
 
+SQL/DDL.sql
+
 # DML File
