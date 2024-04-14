@@ -8,7 +8,7 @@ Final Project Report ↓
 
 # Reduction to Relation Schemas
 Members:  
-  member_id (Primary Key)  
+    member_id (Primary Key)  
   username  
   password  
   email  
